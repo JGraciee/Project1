@@ -1,14 +1,26 @@
 //ENG1003 Project 1
 #include <stdio.h>
 int main() {
-    char word[20];
-    printf("Enter a word: \n");
-    scanf("%s", word);
-    printf("You entered:  %s\n", word);
+    int i, x;
+    char str[100]; // declares a string of 99 characters + null 
     
-    /*char str[] = "hello world";
-    printf("%s \n", str);
     
-   //printf("Hello");*/
-  return 0; 
+    printf("\nPlease enter a string: ");
+    scanf("%s", str);
+    
+    printf("\nPlease choose from the following options:\n");
+    printf("1 = Encrypt string.\n");
+    printf("2 = Decrypt string.\n");
+    scanf("%d", &x);
+
+
+//switch case statement for the above options 
+    
+    return 0;
+    
 }
+    
+    
+    
+    
+   
