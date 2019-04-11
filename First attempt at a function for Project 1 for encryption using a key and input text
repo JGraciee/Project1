@@ -1,0 +1,68 @@
+//ENG1003 Project 1
+#include <stdio.h>
+
+
+//FUNCTION PROTOTYPE FOR MENU OPTION 1: ENCRYPTION 
+void encryptionRotation(char* string, int k); // function prototype for option 1
+
+
+int main() {
+    int i, x, k; // k = key 
+    char string[100]; // declares a string of 99 characters + null 
+    
+    
+    printf("\n Enter a string: "); //more eplicity about what a string is//... 
+    scanf("%s", string);
+    
+    printf("\n Enter an integer between 0 and 25 for key: ");
+    scanf("%d", &k);
+    if (k < 0 || k > 25){ //uses if statement to make sure key is between 0 and 25 and prompts user to re enter a value 
+        printf("Please enter an integer between 0 and 25");
+    }
+    
+ //options for encryption given a text 
+    printf("\nPlease choose from the following options:\n");
+    printf("1 = Encrypt string using character rotation and a key.\n");
+    printf("2 = Encrypt string using character substitution and a key.\n");
+    scanf("%d", &x);
+    
+    
+   // options for decryption given cipher and a key: 
+    printf("\nPlease choose from the following options:\n");
+    printf("1 = Decrypt string using character rotation and a key.\n");
+    printf("2 = Decrypt string using character substitution and a key.\n");
+    scanf("%d", &x);
+   
+   
+   // FUNCTION DEFINITION FOR MENU OPTION 1 ENCRYPTION: 
+   void encryptionRotation(char* string, int k) {
+       for(i = 0; (i < 100 && string[i] != '\0'); i++) // Encryption is working using rotation '\0' = NULL character 
+        string[i] = string[i] + k; //the key for encryption is 3 that is added to ASCII value
+        return string;  // do i need this?? 
+      printf("\nEncrypted string: %s\n", string);
+   }
+   
+   
+   /*switch(x) // refers to option selected above 
+   {
+   case 1:
+      for(i = 0; (i < 100 && string[i] != '\0'); i++) // Encryption is working using rotation 
+        str[i] = string[i] + k; //the key for encryption is 3 that is added to ASCII value
+
+      printf("\nEncrypted string: %s\n", string);
+      break;
+
+   case 2:
+      for(i = 0; (i < 100 && string[i] != '\0'); i++) // not really sure about this decryption thing :/ 
+        str[i] = str[i] - k; //the key for encryption is 3 that is subtracted to ASCII value
+
+      printf("\nDecrypted string: %s\n", string);
+      break;
+
+   default:
+      printf("\nError\n");
+}*/
+    
+    return 0;
+    
+}
