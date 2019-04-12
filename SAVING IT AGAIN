@@ -1,0 +1,177 @@
+//ENG1003 Project 1
+#include <stdio.h>
+
+
+//FUNCTION PROTOTYPES: 
+//FUNTION 1
+void encryptRotation(char* string, int k); // function prototype for option 1
+
+//FUNCTION 2
+void encryptSubstitution(char* string, char l); //l = letter to enter. 
+
+//FUNCTION 3
+void decryptRotation(char* string, int k); // function prototype for option 3 decryption 
+
+//FUNCTION 4
+void decryptSubstitution(char* string, char l);
+
+
+int main() {
+    //int i;
+    int x, k; // k = key, l = letter substitution 
+    char l; 
+    char string[100]; // declares a string of 99 characters + null 
+    //char str[100];// function 3
+    //char s[100]; //function 2
+    //char strings[100]; // function 4 
+    
+
+/******************* SELECTING AN OPTION *****************/
+ //options for encryption given a text 
+    printf("\nPlease choose from the following options:\n");
+    printf("1 = Encrypt string using character rotation and key.\n");
+    printf("2 = Encrypt string using character substitution and alphabet substitution.\n");
+    printf("3 = Decrypt string using character rotation given cipher text and key.\n");
+    printf("4 = Decrypt string using character substitution given cipher text and key.\n");
+    scanf("%d", &x);
+    
+
+
+/******* ENTER A KEY AND MESSAGE TO ENCRYPT OR DECRYPT**********/
+if (x == 1 || x == 3) {
+    printf("\n Enter a string in all UPPERCASE: "); //more eplicity about what a string is//... words?? sentence?? 
+    scanf("%s", string);
+    
+    printf("\n Enter an integer between 0 and 25 for key: ");
+    scanf("%d", &k);
+    if (k < 0 || k > 25){ //uses if statement to make sure key is between 0 and 25 and prompts user to re enter a value 
+        printf("Please enter an integer between 0 and 25");
+}
+    //IF NOT UPPERCASE SHOULD I PROMPT THEM TO REDO IT? 
+
+}
+
+
+    else if (x == 2 || x == 4) {
+        printf("\n Enter a cipher text in all UPPERCASE: "); //more eplicity about what a string is//... words?? sentence?? 
+        scanf("%s", string);
+         //KEY or ALPHABET 
+    //if (x == 1 || x == 2) // do i need this??? 
+        printf("\n Enter a letter for alphabet subsitition between A and Z in UPPERCASE: ");
+        scanf("%c\n", &l);
+        printf("check: %d \n", l);
+        printf("check: %c \n", l);
+    }
+    
+    
+    
+    
+/**************** PRINTING THE RESULTS*****************/
+    if (x == 1){
+        encryptRotation(string, k); // calling a function (name (arguments)) --> dont need data types of arguments 
+        printf("Encrypted string using rotation is: %s\n", string); //calls above string --> ??
+    }
+    
+      
+     if (x == 2){
+        encryptSubstitution(string, l); // calling a function (name (arguments)) --> dont need data types of arguments 
+        printf("Encrypted string using alphabet substitution is: %s\n", string); 
+     }
+
+
+     if (x == 3){
+        decryptRotation(string, k); // calling a function (name (arguments)) --> dont need data types of arguments 
+        printf("Decrypted cipher text using rotation is: %s\n", string);//calls above string --> ??
+    }
+    
+    
+    if (x == 4) {
+        decryptSubstitution(string, l); // calling a function (name (arguments)) --> dont need data types of arguments 
+        printf("Decrypted cipher text using substitution is: %s\n", string);//calls above string --> ??
+    }
+   
+return 0; 
+}
+
+   
+/****************FUNCTION DEFINITIONS******************/ 
+   //FUNCTION 1 WORKS11111
+void encryptRotation(char* string, int k) {
+       int i; 
+       for(i = 0; (i < 100 && string[i] != '\0'); i++) {//'\0' = NULL character 
+        string[i] = (string[i] + k - 65) % 26 + 65; //add key to initial string character and minus 65. 
+        //Then perform a modulus on the answer and add 65 to convert it back to human readable text. 
+        //minus 65 since UPPERCASE A = 65 and needs to convert it to zero to make it between 0 and 25. 
+   }
+}
+
+//FUNCTION 2 - simple substitution 
+void encryptSubstitution(char* string, char l) {
+      int i;
+      printf("Char: %d \n", l);
+      l = l - 65; // make letter between 0 and 25
+      printf("Int : %d \n", l);
+      for(i = 0; (i < 100 && string[i] != '\0'); i++){
+           //string[i] = ((string[i] - 65) + l - 65) % 26 + 65;
+           string[i] = string[i] - 65;
+           string[i] = (string[i] - l) % 26;
+           string[i] = string[i] + 65;
+           
+       }
+}
+//range needs to be between 65 - 90 
+//would i set i as this inside string array???  
+
+   
+   //FUNCTION 3 WORKS!!!!
+void decryptRotation(char* string, int k) {
+       int i; 
+       for(i = 0; (i < 100 && string[i] != '\0'); i++) {// '\0' = NULL character 
+        string[i] = (string[i] - k - 65 + 26) % 26 + 65;
+    }
+}
+
+   
+   //FUNCTION 4 WORKS!!!! 
+void decryptSubstitution(char* string, char l){
+    int i; 
+    l = l - 65; 
+    for(i = 0; ((i < 100) && (string[i] != '\0')); i++) {
+        string[i] = (string[i] - l - 65) % 26 + 65; 
+    }
+}
+    
+    
+
+        
+ 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   /*switch(x) // refers to option selected above 
+   {
+   case 1:
+      for(i = 0; (i < 100 && string[i] != '\0'); i++) // Encryption is working using rotation 
+        str[i] = string[i] + k; //the key for encryption is 3 that is added to ASCII value
+
+      printf("\nEncrypted string: %s\n", string);
+      break;
+
+   case 2:
+      for(i = 0; (i < 100 && string[i] != '\0'); i++) // not really sure about this decryption thing :/ 
+        str[i] = str[i] - k; //the key for encryption is 3 that is subtracted to ASCII value
+
+      printf("\nDecrypted string: %s\n", string);
+      break;
+
+   default:
+      printf("\nError\n");
+}*/
+
