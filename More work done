@@ -1,0 +1,230 @@
+//ENGG1003 - Programming Assignment 1 -- English Text Ciphers
+
+//FULL DESCRIPTION OF MY CODE AND WHAT IT DOES! 
+
+#include <stdio.h>
+#include <ctype.h>
+
+
+//FUNCTION PROTOTYPES: 
+//FUNTION 1 Encryption of a text using a key 
+void encryptRotation(char* string, int key); // function prototype for option 1
+
+
+//FUNCTION 2 Encryption using alphabet substition given text 
+void encryptSubstitution(char* string, char letter); 
+
+
+//FUNCTION 3 Decryption of a cipher using a key 
+void decryptRotation(char* string, int key); // function prototype for option 3 decryption 
+
+
+//FUNCTION 4 Decryption using alphabet substition to decrypt a cipher 
+void decryptSubstitution(char* string, char l);
+//need to explain the * and strings etc 
+
+
+int main() {
+    int x; // declare x as a variable for the menu options of which function the user wants to select int 
+    int i;
+    int key = 0; // k is declared and initialised for the key, recieving input from the user between 0 and 25.int  
+    char letter = 'A'; // declares and initialises variable char 'letter.'
+    char string[100]; // declares and initialises a string of characters of length 99 and a null character (terminating character). 
+    
+
+
+/******************* SELECTING AN OPTION *****************/
+ //menu promting user via standard input to select from the following options.  
+    printf("\nPlease choose from the following options. Enter number of choice:\n");
+    printf("1 = Encrypt string using character rotation and key.\n");
+    printf("2 = Encrypt string using character substitution and alphabet substitution.\n");
+    printf("3 = Decrypt string using character rotation given cipher text and key.\n");
+    printf("4 = Decrypt string using character substitution given cipher text and key.\n");
+    scanf("%d", &x); // x is assigned the value of the integer from user input. 
+
+
+
+/******* FLOW CONTROL **********/
+// Program uses 'if' flow control statements.
+// Program begins by promting user to enter a text or cipher text depending on menu option selected above (consequently value of x).
+// Then, program asks for a key (integer between 0 and 25) or an alphabet character (A - Z) depending on menu option. 
+// Prints results to standard output.
+//ASCII CHARACTERS AND WHAT THEY MEAN! 
+
+
+
+if (x == 1) {
+    printf("\n Enter text in all UPPERCASE: ");  //promts user to enter text to encrypt in all UPPERCASE. 
+    //scanf("%s", string);
+    fgets(string, 100, stdin);
+    printf("\n String entered is!!!! %s", string);
+}
+//WORKS WHEN NOT IN THE BRACKETS?? 
+    printf("\n Enter text in all UPPERCASE: ");  //promts user to enter text to encrypt in all UPPERCASE. 
+    //scanf("%s", string);
+    fgets(string, 100, stdin);
+    printf("\n String entered is!!!! %s", string);
+    
+if (x == 2) {
+    printf("\n Enter text in all UPPERCASE: "); 
+    //scanf("%s", string);
+    fgets(string, 100, stdin);
+    printf("\n String entered is!!!! %s", string);
+}
+    
+    if (x == 1) { // promts user to enter an integer between 0 and 25 for key rotation. 
+        printf("\n Enter a POSITIVE integer between 0 and 25 for key: ");
+        scanf("%d", &key);
+        
+        if (key < 0 || key > 25){ // sets restriction for user where key can only be a positive integer between 0 and 25. 
+        printf("\n Please enter a POSITIVE integer between 0 and 25");
+        }
+        
+        encryptRotation(string, key); // call function 1. uses syntax, name (arguments). NB: do not to need state data types of arguments when calling functions.  
+        printf("\n Encrypted string using rotation is: %s\n", string); // prints string of encrypted characters. 
+    }
+
+    else if ( x== 2) { // 
+printf("\n letter is: %d ", letter);
+printf("\n letter is: %c", letter);
+letter = letter - 65; 
+printf("\n Letter is: %d", letter);
+
+printf("\n Enter a letter in all UPPERCASE: %c", letter); //prompts user to enter a letter in uppercase. 
+scanf("\n %c", &letter); // reads user input and stores in the letter variable as a character. 
+printf("\n Entered letter is: %c", letter);
+printf("\nEntered letter is: %d", letter);
+letter = letter - 65; // perfroms mathematics on the letter input. Substracts 65 to make ASCII character between 0 and 25 for use within the function. 
+printf("\n letter is: %d", letter); // Reads letter as an integer. 
+
+// NOT NECCESSARY?? 
+printf("\n Enter a text: ");
+scanf("\n %s", string); 
+
+
+encryptSubstitution(string, letter); // callS function 2 using syntax name (arguments). Do not need data types of arguments 
+printf("\n Encrypted string using alphabet substitution is: %s\n", string); //Prints result of encrypted string to standard output. 
+
+    }
+    
+    
+    if (x == 3 || x == 4) {// Prompts user to enter a cypher text in all uppercase. 
+        printf("\n Enter a cipher text in UPPERCASE: "); 
+        fgets(string, 100, stdin);
+        printf("\n String entered is!!!! %s", string); // Stores input as a string in the variable 'string.'
+        }
+
+        if (x == 3) { // Prompts user to enter a positive integer between 0 and 25 for the key.
+            printf("\n Enter an integer between 0 and 25 for key: ");
+            scanf("%d", &key); 
+        
+                
+            if (key < 0 || key > 25) {// uses if statement to make sure key is between 0 and 25 and prompts user to re enter a value 
+            printf("\n Please enter an integer between 0 and 25");
+        }
+        
+        decryptRotation(string, key); // calls function 3 using syntax name (arguments). Do not need data types of arguments. 
+        printf("\n Decrypted cipher text using rotation is: %s\n", string);
+    
+}
+
+
+
+    else if ( x== 4){ 
+printf("\n letter is: %d ", letter);
+printf("\n letter is: %c", letter);
+letter = letter - 65; 
+printf("\n Letter is: %d", letter);
+
+printf("\n Enter a letter in all UPPERCASE: %c", letter); //prompts user to enter a letter in uppercase. 
+scanf("\n %c", &letter); // reads user input and stores in the letter variable as a character. 
+printf("\n Entered letter is: %c", letter);
+printf("\nEntered letter is: %d", letter);
+letter = letter - 65; // perfroms mathematics on the letter input. Substracts 65 to make ASCII character between 0 and 25 for use within the function. 
+printf("\n letter is: %d", letter); // Reads letter as an integer.
+
+printf("\n Enter a text: ");
+scanf("\n %s", string);   
+
+
+decryptSubstitution(string, letter); // calls function 4 using syntax name (arguments). Do not need data types of arguments. 
+printf("\n Decrypted cipher text using substitution is: %s\n", string); // Prints result to standard output as a string of characters. 
+}
+
+
+return 0; // Terminates code. 
+
+}
+
+
+/****************FUNCTION DEFINITIONS******************/ 
+    // The 'message' will be a block of English text stored as a string of ASCII characters. 
+    // For the purpose of this assessment all characters are lower case letters. 
+    // 
+    // All input data is to be encoded with the ASCII standard. 
+    // ASCII encoding defines that upper and lower case letters be stored as the following 8-bit integers:
+   
+   // EXPLAIN 65 AND ASCII CHARACTERS so IT MAKES SENSE. 
+   
+  
+   // FUNCTION 1 
+   // Encryption of a text using key rotation 
+void encryptRotation(char* string, int key) { // function prototype. 
+    int i; // Declares an integer counter variable. 
+    if (i == 32) {
+        printf("WHITE SPACE");
+    }
+            for(i = 0; (i < 100 && string[i] != '\0'); i++) { // uses 'for' flow control. Initialises i to 0, and sets that string must be between 0 and 100 and once it reaches a null character (\0' = NULL) is terminates.   
+            string[i] = (string[i] + key - 65); //adds key to initial string of characters and substracts 65 from the string to make characters between 0 and 25. 
+            string[i] = string[i] % 26 + 65; // Perform modulus on the answer of 26 (since 26 characters in alphabet) then adds 65 to convert it back to human readable text (ASCII characters). 
+    }
+}
+
+//FUNCTION 2 
+// text encryption using alphabet substitution 
+// BRIEF DESCRIPTION 
+void encryptSubstitution(char* string, char letter) {
+    int i; // Declares an integer counter variable. 
+    for(i = 0; (i < 100 && string[i] != '\0'); i++){ // uses 'for' flow control. Initialises i to 0, and sets that string must be between 0 and 100 and once it reaches a null character (\0' = NULL) is terminates.   
+           string[i] = string[i] - 65; // substracts 65 to make characters in the string between 0 and 25. 
+           string[i] = (string[i] + letter) % 26; // adds letter value then perfoms modulus of 26. 
+           string[i] = string[i] + 65; // adds 65 to make result an ASCII value and therefore human readable text. 
+
+       }
+}
+
+
+   //FUNCTION 3 Decrypt text using a key rotation  
+   // BRIEF DESCRIPTION 
+void decryptRotation(char* string, int key) { // Function prototype. 
+       int i; // Declares an integer counter variable.
+       for(i = 0; (i < 100 && string[i] != '\0'); i++) { // uses 'for' loop. Initialises i to 0, and sets that string must be between 0 and 100 and once it reaches a null character (\0' = NULL) is terminates.   
+        string[i] = (string[i] - key); //Substracts key from string value. 
+        string[i] = string[i]- 65 + 26; // Substracts 65 to make ASCII characters integer values between 0 and 25. Adds 26 to make it a positive value. 
+        string[i] = string[i] % 26 + 65; // Performs a modulus of 26 then adds 65 to make it ASCII characters. 
+    }
+}
+
+
+
+//FUNCTION 4 Decrypt a cipher text using alphabet substition 
+//description 
+void decryptSubstitution(char* string, char letter){
+    int i; // Declares an integer counter variable.
+    for(i = 0; ((i < 100) && (string[i] != '\0')); i++) { // uses 'for' loop. Initialises i to 0, and sets that string must be between 0 and 100 and once it reaches a null character (\0' = NULL) is terminates.   
+        string[i] = (string[i] - 65); // Substracts 65 to make ASCII character between positive integer values 0 - 25. 
+        string[i] = (string[i] - letter + 26) % 26; // Substracts letter from string and adds 26 to make it a positive value. Performs a modulus of 26. 
+        string[i] = string[i] + 65; // Adds 65 to make it an ASCII character. 
+    }
+}
+
+
+   
+
+
+
+   
+ 
+ 
+ 
+
